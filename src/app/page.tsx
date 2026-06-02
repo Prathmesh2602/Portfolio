@@ -7,6 +7,7 @@ import WorkSection from "@/components/WorkSection";
 import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
 import ContactSection from "@/components/ContactSection";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function Home() {
   // Navigation scroll handler
@@ -18,25 +19,25 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground flex flex-col transition-colors duration-300">
-      
-      {/* 1. Navigation Bar */}
-      <Header onNavClick={scrollToSection} />
+    <>
+      <div className="relative min-h-screen bg-background text-foreground flex flex-col transition-colors duration-300">
+        {/* 1. Navigation Bar */}
+        <Header onNavClick={scrollToSection} />
 
-      {/* 2. Hero Section */}
-      <Hero />
+        {/* 2. Hero Section */}
+        <Hero />
 
-      {/* Ticker Section */}
-      <Ticker />
+        {/* Ticker Section */}
+        <Ticker />
 
-      {/* 3. Work Section */}
-      <WorkSection />
-      
-      <AboutSection />
+        {/* 3. Work Section */}
+        <WorkSection />
 
+        <AboutSection />
 
-      <ContactSection />
-      
-    </div>
+        <ContactSection />
+      </div>
+      <Analytics />
+    </>
   );
 }
