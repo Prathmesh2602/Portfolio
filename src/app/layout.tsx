@@ -5,6 +5,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Prathmesh Jadhav | Senior Full Stack Engineer",
   description: "Portfolio of Prathmesh Jadhav, a Senior Full Stack Engineer specializing in React, Next.js, Node.js, and AWS-based distributed systems.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
