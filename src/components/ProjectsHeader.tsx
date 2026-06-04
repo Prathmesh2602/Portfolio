@@ -77,7 +77,7 @@ export default function ProjectsHeader({ backLink, backLabel, isDarkHero = false
         <Link
           href="/"
           className={`
-            font-syne font-extrabold text-[15px] md:text-base tracking-tight hover:opacity-80 transition-opacity uppercase select-none
+            font-syne font-extrabold text-[12px] md:text-base tracking-tight hover:opacity-80 transition-opacity uppercase select-none
             ${!scrolled && isDarkHero ? "text-white" : "text-foreground"}
           `}
         >
@@ -89,7 +89,7 @@ export default function ProjectsHeader({ backLink, backLabel, isDarkHero = false
           <Link
             href={resolvedBack.link}
             className={`
-              hidden md:block text-[10px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-80 transition-all duration-200
+              hidden md:block text-[8px] md:text-[11px] font-bold tracking-widest uppercase hover:opacity-80 transition-all duration-200
               ${
                 !scrolled && isDarkHero
                   ? "text-white/80 hover:text-white"

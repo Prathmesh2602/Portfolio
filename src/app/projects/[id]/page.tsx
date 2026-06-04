@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import ProjectsHeader from "@/components/ProjectsHeader";
 import { PROJECTS } from "@/data";
 
@@ -15,6 +15,11 @@ interface PageProps {
 export default function ProjectDetailPage({ params }: PageProps) {
   const { id } = use(params);
   const project = PROJECTS.find((p) => p.id === id);
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   if (!project) {
     return notFound();
@@ -30,31 +35,21 @@ export default function ProjectDetailPage({ params }: PageProps) {
   return (
     <>
       <div className="relative min-h-screen bg-background text-foreground flex flex-col transition-colors duration-300 overflow-x-hidden">
-        {/* Shutter Opening Page Transition */}
+        {/* Page transition — shutter on desktop, fade on mobile */}
         <div className="fixed inset-0 z-[100] pointer-events-none flex flex-col">
-          {/* Top Shutter */}
           <motion.div
-            initial={{ y: 0 }}
-            animate={{ y: "-100%" }}
-            transition={{
-              duration: 0.9,
-              ease: [0.85, 0, 0.15, 1],
-              delay: 0.15,
-            }}
-            className="h-1/2 w-full border-b border-white/5"
-            style={{ backgroundColor: "var(--background-card, #1c1c1e)" }}
+            initial={{ opacity: 1, y: 0 }}
+            animate={isMobile ? { opacity: 0 } : { y: "-100%" }}
+            transition={{ duration: isMobile ? 0.4 : 0.9, ease: [0.85, 0, 0.15, 1], delay: 0.1 }}
+            className="h-1/2 w-full"
+            style={{ backgroundColor: "var(--background-card, #1c1c1e)", willChange: "transform, opacity" }}
           />
-          {/* Bottom Shutter */}
           <motion.div
-            initial={{ y: 0 }}
-            animate={{ y: "100%" }}
-            transition={{
-              duration: 0.9,
-              ease: [0.85, 0, 0.15, 1],
-              delay: 0.15,
-            }}
-            className="h-1/2 w-full border-t border-white/5"
-            style={{ backgroundColor: "var(--background-card, #1c1c1e)" }}
+            initial={{ opacity: 1, y: 0 }}
+            animate={isMobile ? { opacity: 0 } : { y: "100%" }}
+            transition={{ duration: isMobile ? 0.4 : 0.9, ease: [0.85, 0, 0.15, 1], delay: 0.1 }}
+            className="h-1/2 w-full"
+            style={{ backgroundColor: "var(--background-card, #1c1c1e)", willChange: "transform, opacity" }}
           />
         </div>
 
@@ -329,7 +324,7 @@ export default function ProjectDetailPage({ params }: PageProps) {
             <span className="text-[10px] md:text-[11px] font-bold tracking-[0.2em] uppercase text-muted font-syne block mb-3">
               Next Case Study
             </span>
-            <h2 className="font-syne font-extrabold text-[8vw] sm:text-[6vw] lg:text-[4vw] leading-[1.05] tracking-tighter text-foreground group-hover:opacity-85 transition-opacity uppercase select-none max-w-[85%]">
+            <h2 className="font-syne font-extrabold text-[6vw] sm:text-[6vw] lg:text-[4vw] leading-[1.05] tracking-tighter text-foreground group-hover:opacity-85 transition-opacity uppercase select-none max-w-[85%]">
               {nextProject.meta.split(" with ")[0]}
             </h2>
             <div className="text-xs font-bold text-muted uppercase tracking-widest mt-4">
